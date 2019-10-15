@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: pubsub-test
+  cloud:
+    gcp:
+      project-id: poc-arquitetura
+      credentials:
+        location: classpath:auth.json
+
+server:
+  port: 8080
+
+logging:
+  level:
+    org:
+      springframework:
+        web: INFO
