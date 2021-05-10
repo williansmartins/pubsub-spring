@@ -14,7 +14,7 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.handler.annotation.Header;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.williansmartins.pubsub.domain.User;
+import com.williansmartins.pubsub.domain.Informe;
 
 @Configuration
 public class PubSubConfig {
@@ -25,14 +25,20 @@ public class PubSubConfig {
         PubSubInboundChannelAdapter adapter = new PubSubInboundChannelAdapter(pubSubTemplate, "com.williansmartins.assinatura1");
         adapter.setOutputChannel(inputChannel);
         adapter.setAckMode(AckMode.MANUAL);
-        adapter.setPayloadType(User.class);
+        adapter.setPayloadType(Informe.class);
         return adapter;
     }
 
     @ServiceActivator(inputChannel = "channelConsumer")
     public void messageReceiver(final String payload, @Header(GcpPubSubHeaders.ORIGINAL_MESSAGE) BasicAcknowledgeablePubsubMessage message) {
-    	System.out.println(payload);
-    	System.out.println(message);
+    	System.out.println("================");
+        System.out.println("payload");
+        System.out.println(payload);
+
+        System.out.println("----------------");
+    	System.out.println("message");
+        System.out.println(message);
+
         message.ack();
     }
     

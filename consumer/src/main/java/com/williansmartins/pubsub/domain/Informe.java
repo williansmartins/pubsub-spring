@@ -2,15 +2,15 @@ package com.williansmartins.pubsub.domain;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class User {
+public class Informe {
 
     private String nome;
-    private int idade;
+    private String documento;
 
     @JsonCreator
-    public User(@JsonProperty("nome") String nome, int idade) {
+    public Informe(@JsonProperty("nome") String nome, String documento) {
         this.nome = nome;
-        this.idade = idade;
+        this.documento = documento;
     }
 
     public String getNome() {
@@ -21,18 +21,19 @@ public class User {
         this.nome = nome;
     }
     
-    public int getIdade() {
-		return idade;
+    public String getDocumento() {
+		return documento;
 	}
 
-	public void setIdade(int idade) {
-		this.idade = idade;
+	public void setDocumento(String documento) {
+		this.documento = documento;
 	}
 
 	@Override
     public String toString() {
-        return "User{" +
-                "nome='" + nome + '\'' +
+        return "Informe{" +
+                    "nome='" + nome + '\'' +
+                    "documento='" + documento + '\'' +
                 '}';
     }
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.williansmartins.pubsub.config.PubSubConfig;
-import com.williansmartins.pubsub.domain.User;
+import com.williansmartins.pubsub.domain.Informe;
 
 @RestController
 public class ApiController {
@@ -18,12 +18,12 @@ public class ApiController {
 	@Autowired
 	private PubSubConfig.PubSubOutboundGateway messagingGateway;
 
-	@RequestMapping(value = "send/{nome}/{idade}", method = RequestMethod.GET)
+	@RequestMapping(value = "gerar/informe/{documento}/{nome}/{sobrenome}", method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<?> send(@PathVariable(value="nome") String nome, @PathVariable(value="idade") int idade) {
-		User user = new User(nome, idade);
-		messagingGateway.sendToPubSub("com.williansmartins.topico1", user);
-		return new ResponseEntity<>("A mensagem [" + user.toString() + "] foi enviada!", HttpStatus.OK);
+	public ResponseEntity<?> send(@PathVariable(value="documento") String documento, @PathVariable(value="nome") String nome, @PathVariable(value="sobrenome") String sobrenome) {
+		Informe informe = new Informe(nome + " " + sobrenome, documento);
+		messagingGateway.sendToPubSub("com.williansmartins.topico1", informe);
+		return new ResponseEntity<>("A mensagem [" + informe + "] foi enviada!", HttpStatus.OK);
 	}
 	
 	

@@ -15,7 +15,7 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.williansmartins.pubsub.domain.User;
+import com.williansmartins.pubsub.domain.Informe;
 
 @Configuration
 public class PubSubConfig {
@@ -44,7 +44,7 @@ public class PubSubConfig {
 
     @MessagingGateway(defaultRequestChannel = "pubSubOutputChannel")
     public interface PubSubOutboundGateway {
-        void sendToPubSub(@Header(GcpPubSubHeaders.TOPIC) String topic, User message);
+        void sendToPubSub(@Header(GcpPubSubHeaders.TOPIC) String topic, Informe message);
     }
 
     @Bean
